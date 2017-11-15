@@ -15,16 +15,16 @@ public class p698 {
         if (k <= 0 || sum % k != 0) return false;
         target = sum / k;
         visited = new boolean[nums.length];
-        return backtrack(k, 0, 0, 0);
+        return backtrack(k, 0, 0);
     }
 
-    private boolean backtrack(int k, int start, int sum, int num) {
+    private boolean backtrack(int k, int start, int sum) {
         if (k == 1) return true;
-        if (sum == target && num > 0) return backtrack(k-1, 0, 0, 0);
+        if (sum == target) return backtrack(k-1, 0, 0);
         for (int i = start; i < nums.length; i++) {
             if (!visited[i]) {
                 visited[i] = true;
-                if (backtrack(k, i+1, sum+nums[i], num+1)) return true;
+                if (backtrack(k, i+1, sum+nums[i])) return true;
                 visited[i] = false;
             }
         }
