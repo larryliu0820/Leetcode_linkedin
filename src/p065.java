@@ -8,11 +8,11 @@ public class p065 {
         boolean pointSeen = false;
         boolean eSeen = false;
         boolean numberSeen = false;
-        boolean numberAfterE = true;
+        boolean numberAfterE = false;
         for(int i=0; i<s.length(); i++) {
-            if('0' <= s.charAt(i) && s.charAt(i) <= '9') {
+            if(Character.isDigit(s.charAt(i))) {
                 numberSeen = true;
-                numberAfterE = true;
+                if (eSeen) numberAfterE = true;
             } else if(s.charAt(i) == '.') {
                 if(eSeen || pointSeen) {
                     return false;
@@ -22,7 +22,6 @@ public class p065 {
                 if(eSeen || !numberSeen) {
                     return false;
                 }
-                numberAfterE = false;
                 eSeen = true;
             } else if(s.charAt(i) == '-' || s.charAt(i) == '+') {
                 if(i != 0 && s.charAt(i-1) != 'e') {
@@ -32,6 +31,6 @@ public class p065 {
                 return false;
             }
         }
-        return numberSeen && numberAfterE;
+        return numberSeen && (numberAfterE == eSeen);
     }
 }

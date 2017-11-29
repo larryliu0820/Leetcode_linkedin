@@ -8,7 +8,7 @@ public class p367 {
         int lo = 0, hi = num / 2, mid;
         while (lo <= hi) {
             mid = lo / 2 + hi / 2 + (lo % 2 + hi % 2) / 2;
-            if (num / mid == mid && mid * mid == num) return true;
+            if (mid * mid == num) return true;
             else if (num / mid > mid) lo = mid + 1;
             else hi = mid -1;
         }
