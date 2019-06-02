@@ -6,20 +6,25 @@ import java.util.*;
  */
 public class p364 {
 
-    public int depthSumInverse(List<NestedInteger> nestedList) {
-        int res = 0, currSum = 0;
-        Queue<NestedInteger> q = new LinkedList<>();
-        for (NestedInteger ni: nestedList) q.offer(ni);
-        while (!q.isEmpty()) {
-            Queue<NestedInteger> temp = new LinkedList<>();
-            while (!q.isEmpty()) {
-                NestedInteger curr = q.poll();
-                if (curr.isInteger()) currSum += curr.getInteger();
-                else temp.addAll(curr.getList());
+    int sum =0;
+    public int depthSum(List<NestedInteger> nestedList) {
+        if(nestedList == null || nestedList.size() == 0)
+        return 0;
+        dfs(nestedList, 1);
+        return sum;
+    }
+    
+    private void dfs(List<NestedInteger> nestedList , int level)
+    {
+        for(NestedInteger value:nestedList)
+        {
+            if(value.isInteger())
+            {
+                sum += (level * value.getInteger());
             }
-            res += currSum;
-            q = temp;
+            else{
+                dfs(value.getList(), level+1);
+            }
         }
-        return res;
     }
 }
